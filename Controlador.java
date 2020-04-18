@@ -31,7 +31,7 @@ public class Controlador  implements ActionListener{
         vista.setVisible(true);
         palabraBuscar = modelo.palabraTransformada();
         vista.textoPalabra.setText(palabraBuscar);
-        vista.textoNumeroIntentos.setText("0");
+        vista.textoNumeroIntentos.setText("5");
 
     }
 

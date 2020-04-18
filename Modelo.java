@@ -11,12 +11,13 @@ public class Modelo extends Vista {
     protected int numEscogido;
     protected String cadena,result="";
     protected int binario, bandera;
-    protected int intentos=0;
+    protected int intentos=5;
     protected String intentosParseado="";
     protected int aciertos=0;
     protected int porLograr=0;
     protected String archivos="archivo.txt";
     protected String archivoEscribir="saveData.txt";
+    protected int aciertoUnico;
     
     
     ArrayList<String> arregloLetrasBuscar = new ArrayList<String>();
@@ -90,6 +91,7 @@ public class Modelo extends Vista {
     
     public void letraEscogidad(Character caracter){
         bandera=0;
+        
         for(int i=0;i<arregloLetraEscogida.size();i++){
             if(caracter==arregloLetraEscogida.get(i)){
                 bandera++;
@@ -101,8 +103,10 @@ public class Modelo extends Vista {
         }else if(bandera==0){
             
             arregloLetraEscogida.add(caracter);
-            intentos++;
+            intentos--;
             Character ch = '_';
+            aciertoUnico=0;
+            
             for (int i=0;i<arregloPalabra.size();i++){
                 
                 if(arregloPalabra.get(i).equals(caracter)){
@@ -110,8 +114,16 @@ public class Modelo extends Vista {
                         
                         arregloPalabraModificada.set(i, caracter);
                         aciertos++;
+                        if(aciertoUnico==0){
+                            aciertoUnico++;
+                            intentos++;
+                        }
+                        
                         
                     }
+                }else if(intentos == -1){
+                    JOptionPane.showMessageDialog(null, "Intentos terminados");
+                    System.exit(0);
                 }
             }
             
