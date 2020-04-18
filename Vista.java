@@ -3,7 +3,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -79,33 +78,6 @@ public class Vista extends JFrame{
         
         add(panelPrincipal);
         
-    }
-
-    public void letraEscogidad(Character caracter) {
-        bandera = 0;
-        for (int i = 0; i < arregloLetraEscogida.size(); i++) {
-            if (caracter == arregloLetraEscogida.get(i)) {
-                bandera++;
-            }
-        }
-        if (bandera == 1) {
-            JOptionPane.showMessageDialog(null, "Ese caracter ya lo escogio");
-        } else if (bandera == 0) {
-            arregloLetraEscogida.add(caracter);
-            intentos--;
-            Character ch = '_';
-            for (int i = 0; i < arregloPalabra.size(); i++) {
-                if (arregloPalabra.get(i).equals(caracter)) {
-                    if (arregloPalabraModificada.get(i).equals(ch)) {
-                        arregloPalabraModificada.set(i, caracter);
-                        aciertos++;
-                    }
-                    if (i == 0) {
-                        intentos++;
-                    }
-                }
-            }
-        }
     }
     
 }

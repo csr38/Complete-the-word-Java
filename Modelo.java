@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Modelo extends Vista {
-    protected int contador;
+    protected int contador=0;
     protected int numEscogido;
     protected String cadena,result="";
     protected int binario, bandera;
-    protected int intentos=5;
+    protected int intentos=0;
     protected String intentosParseado="";
     protected int aciertos=0;
     protected int porLograr=0;
@@ -88,6 +88,36 @@ public class Modelo extends Vista {
         return result;
     }
     
+    public void letraEscogidad(Character caracter){
+        bandera=0;
+        for(int i=0;i<arregloLetraEscogida.size();i++){
+            if(caracter==arregloLetraEscogida.get(i)){
+                bandera++;
+            }
+        }
+        
+        if(bandera==1){
+            JOptionPane.showMessageDialog(null, "Ese caracter ya lo escogio");
+        }else if(bandera==0){
+            
+            arregloLetraEscogida.add(caracter);
+            intentos++;
+            Character ch = '_';
+            for (int i=0;i<arregloPalabra.size();i++){
+                
+                if(arregloPalabra.get(i).equals(caracter)){
+                    if(arregloPalabraModificada.get(i).equals(ch)){
+                        
+                        arregloPalabraModificada.set(i, caracter);
+                        aciertos++;
+                        
+                    }
+                }
+            }
+            
+        }
+
+    }
     public String actualizarPalabra(){
         result="";
         for (int i=0;i<arregloPalabraModificada.size();i++){
@@ -101,9 +131,6 @@ public class Modelo extends Vista {
             if(aciertos==porLograr){
                 JOptionPane.showMessageDialog(null, "Ha logrado adivinar la palabra en: "+intentosParseado+" intentos");
                 saveData();
-            }else if(intentos == -1){
-                JOptionPane.showMessageDialog(null, "Se a Pasado de los intentos");
-                System.exit(0);
             }
             return intentosParseado;
         }catch(Exception ex){
